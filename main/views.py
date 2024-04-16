@@ -6,15 +6,18 @@ from django.template import context
 # Create your views here.
 def index(request):
     context = {
-        "title": "Home",
-        "content": "Главная страница магазина - Home",
-        "list": ["first", "second"],
-        "dict": {"first": 1},
-        "is_active": True,
+        "title": "MelodyStore - Главная",
+        "content": "Магазин музыкальных инструментов MelodyStore",
     }
 
     return render(request, "main/index.html", context)
 
 
 def about(request):
-    return HttpResponse("About page")
+    context = {
+        "title": "MelodyStore - О нас",
+        "content": "О нас",
+        "text_on_page": "Текст о том, какой наш магазин прекрасный и почему вы должны выбрать именно вас",
+    }
+
+    return render(request, "main/about.html", context)
