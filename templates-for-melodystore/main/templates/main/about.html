@@ -1,0 +1,22 @@
+{% extends "main/base.html" %}
+
+
+{% load static %}
+
+
+{% block content %}
+
+   <div class="card">
+      <div class="card-body">
+         <div class="bg-white custom-shadow">
+            <div class="mt-2" style="text-align: center;">
+               <h2>{{ content }}</h2>
+            </div>
+            <div class="mt-2">
+               <p>{{ text_on_page }}</p>
+            </div>
+         </div>
+      </div>
+   </div>
+
+{% endblock content %}
