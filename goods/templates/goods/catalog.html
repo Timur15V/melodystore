@@ -53,35 +53,42 @@
             {% for product in goods %}
                <div class="col-lg-4 col-md-6 p-4">
                   <div class="card border-dark rounded shadow">
-                     <div class="card-image">
-                        <img style="width: 100%; height: 100%" src="{% static product.image %}" class="card-img-top" alt="...">
-                     </div>
-                  
-                     <div class="card-body">
-                           <a href="{% url "catalog:product" %}">
-                              <p class="card-title">{{ product.name }}</p>
-                           </a>
-                           <p class="card-text text-truncate">
-                              {{ product.description }}
-                           </p>
-                           <p class="product_id">Артикул: {{ product.vendor_code }}</p>
-                           <div class="d-flex justify-content-between">
-                              <p><strong>{{product.price}} Руб.</strong></p>
-                              {% comment %} <p><s>100</s> Руб.</p>
 
-                              <span class="badge bg-warning text-dark">Скидка 10.00 %</span> {% endcomment %}
-                              <!-- <p><strong>100.00 $</strong></p> -->
-                              {% comment %} <a href="#" class="btn add-to-cart">
-                                 <img class="mx-1" src="{% static "/deps/icons/cart-plus.svg" %}" alt="Catalog Icon"
-                                    width="32" height="32">
-                              </a> {% endcomment %}
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" class="card-img-top" alt="...">
+                    {% else %}
+                        <img src="{% static 'deps/images/Notfoundimage.png' %}" class="card-img-top" alt="...">
+                    {% endif %}
+                    <div class="card-body">
+
+                        <a href="{% url "catalog:product" %}">
+                            <p class="card-title">{{ product.name }}</p>
+                        </a>
+                        <p class="card-text text-truncate">
+                            {{ product.description }}
+                        </p>
+                        <p class="product_id">Артикул: {{ product.vendorCode }}</p>
+                        <div class="d-flex justify-content-between">
+                            {% if product.discount %}
+                                <p><s>{{product.price}}</s> Руб.</p>
+                                <p><strong> {{product.sell_price}} Руб.</strong></p>
+                                <span class="badge bg-warning text-dark"  style="height: 25px;">Скидка {{product.discount}} %</span>
+                            {% else %}
+                                <p><strong>{{product.price}} Руб.</strong></p>
+                            {% endif %}
+                            {% comment %} <p><strong>100.00 $</strong></p> {% endcomment %}
                         </div>
+
                         <div class="addtocart">
-                           <a href="#" class="btn add-to-cart btn-dark">
-                              Добавить в корзину
-                           </a>
+                            <a href="#" class="btn add-to-cart btn-dark">
+                                Добавить в корзину
+                            </a>
                         </div>
-                     </div>
+                        {% comment %} <a href="#" class="btn add-to-cart">
+                            <img class="mx-1" src="{% static "/deps/icons/cart-plus.svg" %}" alt="Catalog Icon"
+                                width="32" height="32">
+                        </a> {% endcomment %}
+                    </div>
                   </div>
                </div>
             {% endfor %}
