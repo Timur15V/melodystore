@@ -25,6 +25,9 @@ class Subcategories(models.Model):
     slug = models.SlugField(
         max_length=200, unique=True, blank=True, null=True, verbose_name="URL"
     )
+    image = models.ImageField(
+        upload_to="goods_images", blank=True, null=True, verbose_name="Изображение"
+    )
     category = models.ForeignKey(
         to=Categories, on_delete=models.CASCADE, verbose_name="Категория"
     )
@@ -67,6 +70,7 @@ class Products(models.Model):
         db_table = "product"
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
+        ordering = ("id",)
 
     def __str__(self):
         return f"{self.name} Количество - {self.quantity}"

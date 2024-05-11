@@ -54,23 +54,27 @@
                <div class="col-lg-4 col-md-6 p-4">
                   <div class="card border-dark rounded shadow">
 
-                    {% if product.image %}
-                        <img src="{{ product.image.url }}" class="card-img-top" alt="...">
-                    {% else %}
-                        <img src="{% static 'deps/images/Notfoundimage.png' %}" class="card-img-top" alt="...">
-                    {% endif %}
+
                     <div class="card-body">
 
-                        <a href="{% url "catalog:product" product.slug %}">
+                        {% if product.image %}
+                        <img src="{{ product.image.url }}" class="card-img-top" alt="...">
+                        {% else %}
+                            <img src="{% static 'deps/images/Notfoundimage.png' %}" class="card-img-top" alt="...">
+                        {% endif %}
+
+                        <a href="{% url "catalog:product" product.category.category.slug product.category.slug product.slug %}">
                             <p class="card-title">{{ product.name }}</p>
                         </a>
+
+
                         <p class="card-text text-truncate">
                             {{ product.description }}
                         </p>
                         <p class="product_id">Артикул: {{ product.vendorCode }}</p>
                         <div class="d-flex justify-content-between">
                             {% if product.discount %}
-                                <p><s>{{product.price}}</s> Руб.</p>
+                                <p><s>{{product.price}}</s></p>
                                 <p><strong> {{product.sell_price}} Руб.</strong></p>
                                 <span class="badge bg-warning text-dark"  style="height: 25px;">Скидка {{product.discount}} %</span>
                             {% else %}
@@ -93,24 +97,27 @@
                </div>
             {% endfor %}
            <!-- Карта товара -->
-
-
-
-
        </div>
        <!-- Пагинация -->
        <nav aria-label="Page navigation example">
            <ul class="pagination justify-content-center my-4">
                <div class="custom-shadow d-flex">
-                   <li class="page-item disabled">
-                       <a class="page-link">Previous</a>
+
+                   <li class="page-item {% if not goods.has_previous %} disabled {% endif %}">
+                       <a class="page-link" href="{% if goods.has_previous %} ?page={{goods.previous_page_number}} {% else %} # {% endif %}"> &#8592; </a>
                    </li>
-                   <li class="page-item"><a class="page-link" href="#">1</a></li>
-                   <li class="page-item"><a class="page-link" href="#">2</a></li>
-                   <li class="page-item"><a class="page-link" href="#">3</a></li>
-                   <li class="page-item">
-                       <a class="page-link" href="#">Next</a>
-                   </li>
+
+                    {% for page in goods.paginator.page_range %}
+                        {% if page >= goods.number|add:-2 and page <= goods.number|add:2 %}
+                            <li class="page-item {% if goods.number == page %} active {% endif %}">
+                                <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    <li class="page-item {% if not goods.has_next %} disabled {% endif %}">
+                        <a class="page-link" href="{% if goods.has_next %} ?page={{goods.next_page_number}} {% else %} # {% endif %}"> &#8594; </a>
+                    </li>
                </div>
            </ul>
        </nav>
