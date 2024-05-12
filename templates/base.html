@@ -37,7 +37,7 @@
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
                            <li><a class="dropdown-item" href="#">Доставка и оплата</a></li>
                            <li><a class="dropdown-item" href="#">Контактная информация</a></li>
-                           <li><a class="dropdown-item" href="{% url "main:about" %}">О нас</a></li>
+                           <li><a class="dropdown-item" href="{% url 'main:about' %}">О нас</a></li>
                         </ul>
                      </li>
                      <li class="nav-item dropdown">
@@ -62,16 +62,16 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
                            <li><a class="dropdown-item" href="./carts/cart.html">Корзина</a></li>
-                           <li><a class="dropdown-item" href="./users/profile.html">Личный кабинет</a></li>
+                           <li><a class="dropdown-item" href="{% url "users:profile" %}">Личный кабинет</a></li>
                            <li><a class="dropdown-item" href="{% url "admin:index" %}">Админ панель</a></li>
                            <li>
                               <hr class="dropdown-divider">
                            </li>
-                           <li><a class="dropdown-item" href="#">Выйти</a></li>
+                           <li><a class="dropdown-item" href="{% url "users:logout" %}">Выйти</a></li>
                         </ul>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Войти</a>
+                        <a class="nav-link" href="{% url "users:login" %}" tabindex="-1" aria-disabled="true">Войти</a>
                      </li>
                   </ul>
 
@@ -91,6 +91,7 @@
          </nav>
       </header>
       <div class="main">
+         {% include "includes/notifications.html" %}
          {% block content %}{% endblock content %}
       </div>
       <footer>
