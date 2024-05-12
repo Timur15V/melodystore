@@ -5150,7 +5150,8 @@ fieldset:disabled .btn {
 .card-img,
 .card-img-bottom,
 .card-img-top {
-   width: 100%
+   width: 100%;
+   max-height: 300px;
 }
 
 .card-img,
@@ -5525,7 +5526,9 @@ fieldset:disabled .btn {
    text-align: center;
    white-space: nowrap;
    vertical-align: baseline;
-   border-radius: var(--bs-badge-border-radius)
+   border-radius: var(--bs-badge-border-radius);
+   position: absolute;
+   top: 10px
 }
 
 .badge:empty {

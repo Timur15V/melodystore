@@ -3,9 +3,9 @@ html {
 }
 
 .main {
-   margin: 30px 15%;
+   margin: 30px 14%;
    flex: 1 0 auto;
-   min-height: calc(100vh - 80px);
+   min-height: calc(100vh - 200px);
 }
 
 body {

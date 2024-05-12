@@ -94,41 +94,51 @@
  
                     </form>
                 {% endif %}
-
            </div>
 
 
+            {% if request.GET.q %}
+                <h3 class="mt-4">Результаты поиска по запросу {{ request.GET.q }}</h3>
+                {% if not goods %}
+                    <h4 class="mt-4">По запросу ничего не найдено...</h4>
+                {% endif %}
+            {% endif %}
+
             {% for product in goods %}
+
                <div class="col-lg-4 col-md-6 p-4">
                   <div class="card border-dark rounded shadow">
 
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" class="card-img-top" alt="...">
+                    {% else %}
+                        <img src="{% static 'deps/images/Notfoundimage.png' %}" class="card-img-top" alt="...">                        
+                    {% endif %}
+                    {% comment %} <div class="card-img-overlay">
+                        {% if product.discount %}
+                            <span class="badge bg-warning text-dark"  style="height: 20px;">Скидка {{product.discount}} %</span>
+                        {% endif %}
+                    </div> {% endcomment %}
+
 
                     <div class="card-body">
-
-                        {% if product.image %}
-                        <img src="{{ product.image.url }}" class="card-img-top" alt="...">
-                        {% else %}
-                            <img src="{% static 'deps/images/Notfoundimage.png' %}" class="card-img-top" alt="...">
-                        {% endif %}
-
                         <a href="{% url "catalog:product" product.category.category.slug product.category.slug product.slug %}">
                             <p class="card-title">{{ product.name }}</p>
                         </a>
-
-
                         <p class="card-text text-truncate">
                             {{ product.description }}
                         </p>
                         <p class="product_id">Артикул: {{ product.vendorCode }}</p>
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between" style="font-size: 15px">
                             {% if product.discount %}
                                 <p><s>{{product.price}}</s></p>
                                 <p><strong> {{product.sell_price}} Руб.</strong></p>
-                                <span class="badge bg-warning text-dark"  style="height: 25px;">Скидка {{product.discount}} %</span>
+                                {% if product.discount %}
+                                    <span class="badge bg-warning text-dark"  style="height: 20px;">Скидка {{product.discount}} %</span>
+                                {% endif %}
                             {% else %}
                                 <p><strong>{{product.price}} Руб.</strong></p>
                             {% endif %}
-                            {% comment %} <p><strong>100.00 $</strong></p> {% endcomment %}
                         </div>
 
                         <div class="addtocart">
@@ -140,6 +150,7 @@
                             <img class="mx-1" src="{% static "/deps/icons/cart-plus.svg" %}" alt="Catalog Icon"
                                 width="32" height="32">
                         </a> {% endcomment %}
+
                     </div>
                   </div>
                </div>
@@ -147,28 +158,31 @@
            <!-- Карта товара -->
        </div>
        <!-- Пагинация -->
-       <nav aria-label="Page navigation example">
-           <ul class="pagination justify-content-center my-4">
-               <div class="custom-shadow d-flex">
+       {% if goods %}
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center my-4">
+                    <div class="custom-shadow d-flex">
 
-                   <li class="page-item {% if not goods.has_previous %} disabled {% endif %}">
-                       <a class="page-link" href="{% if goods.has_previous %} ?{% change_params page=goods.previous_page_number %} {% else %} # {% endif %}"> &#8592; </a>
-                   </li>
+                        <li class="page-item {% if not goods.has_previous %} disabled {% endif %}">
+                            <a class="page-link" href="{% if goods.has_previous %} ?{% change_params page=goods.previous_page_number %} {% else %} # {% endif %}"> &#8592; </a>
+                        </li>
 
-                    {% for page in goods.paginator.page_range %}
-                        {% if page >= goods.number|add:-2 and page <= goods.number|add:2 %}
-                            <li class="page-item {% if goods.number == page %} active {% endif %}">
-                                <a class="page-link" href="?{% change_params page=page %}">{{ page }}</a>
-                            </li>
-                        {% endif %}
-                    {% endfor %}
+                        {% for page in goods.paginator.page_range %}
+                            {% if page >= goods.number|add:-2 and page <= goods.number|add:2 %}
+                                <li class="page-item {% if goods.number == page %} active {% endif %}">
+                                    <a class="page-link" href="?{% change_params page=page %}">{{ page }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
 
-                    <li class="page-item {% if not goods.has_next %} disabled {% endif %}">
-                        <a class="page-link" href="{% if goods.has_next %} ?{% change_params page=goods.next_page_number %} {% else %} # {% endif %}"> &#8594; </a>
-                    </li>
-               </div>
-           </ul>
-       </nav>
+                        <li class="page-item {% if not goods.has_next %} disabled {% endif %}">
+                            <a class="page-link" href="{% if goods.has_next %} ?{% change_params page=goods.next_page_number %} {% else %} # {% endif %}"> &#8594; </a>
+                        </li>
+                    </div>
+                </ul>
+            </nav>  
+       {% endif %}
+
    </div>
 </div>
 {% endblock content %}
