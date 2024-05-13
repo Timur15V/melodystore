@@ -129,10 +129,10 @@
                             {{ product.description }}
                         </p>
                         <p class="product_id">Артикул: {{ product.vendorCode }}</p>
-                        <div class="d-flex justify-content-between" style="font-size: 15px">
+                        <div class="d-flex" style="font-size: 15px;">
                             {% if product.discount %}
                                 <p><s>{{product.price}}</s></p>
-                                <p><strong> {{product.sell_price}} Руб.</strong></p>
+                                <p style="margin-left: 10px"><strong> {{product.sell_price}} Руб.</strong></p>
                                 {% if product.discount %}
                                     <span class="badge bg-warning text-dark"  style="height: 20px;">Скидка {{product.discount}} %</span>
                                 {% endif %}
