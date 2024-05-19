@@ -9,22 +9,19 @@
       <ul class="list-group list-group-flush">
          <li class="list-group-item">
                <div class="row text-center">
-                  {% comment %} <div class="col p-0">
-                     <img src="{{ cart.product.image.url }}" alt="" style="margin: 0px 15px; width:40px; height: 40px">
-                  </div> {% endcomment %}
                   <div class="col p-0">
                      <div class="input-group d-flex">
                            <span class="input-group-btn">
-                              <button type="button"
+                              <button type="button" @click="click_minus"
                                  class="btn btn-dark btn-sm decrement"
                                  data-cart-id="" data-cart-change-url=""
                                  style="margin: 0px 5px;">-</button>
                            </span>
 
-                           <input type="text" class="form-control number" value="{{ cart.quantity }}" readonly>
+                           <input type="text" v-model="count" class="form-control number" value="{{ cart.quantity }}" readonly>
                            
                            <span class="input-group-btn">
-                              <button type="button"
+                              <button type="button" @click="click_plus"
                                  class="btn btn-dark btn-sm increment"
                                  data-cart-id="" data-cart-change-url="" style="margin: 0px 5px;">+</button>
                            </span>
@@ -35,7 +32,7 @@
                   </div>
                   <div class="col p-0"><strong>{{cart.products_price}} Руб</strong></div>
                   <div class="col p-0">
-                     <a href="{% url "cart:cart_remove" cart.id %}" class="remove-from-cart" data-cart-id="">
+                     <a href="{% url "cart:cart_remove" %}" class="remove-from-cart" data-cart-id="">
                            <img class="mx-1" src="{% static "deps/icons/trash_fill.svg" %}"
                               alt="Catalog Icon" width="16" height="16">
                      </a> 

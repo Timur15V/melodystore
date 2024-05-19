@@ -11,13 +11,14 @@
    <link href="{% static "deps/css/my-styles.css" %}" rel="stylesheet">
 
    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
    <link rel="icon" type="image/png" sizes="32x32" href="{% static "deps/images/logo.png" %}"> 
    <title>{{ title }}</title>
 </head>
 
 <body>
-   <div class="wrapper">
+   <div class="wrapper" id="app">
       <header>
          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
@@ -97,14 +98,6 @@
          </nav>
       </header>
       <div class="main">
-         <div class="container">
-            <!-- Каталог и корзина с фиксированным расположением на странице -->
-            <div class="row mt-1 position-fixed z-3">
-               <!-- Разметка модального окна корзины -->
-
-               <!-- Закончилась разметка модального окна -->
-            </div>
-         </div>
          {% include "includes/notifications.html" %}
          {% block content %}{% endblock content %}
       </div>
@@ -137,9 +130,11 @@
 
 
    <script src="{% static "deps/js/jquery/jquery-3.7.0.min.js" %}"></script>
+
    <script src="{% static "deps/js/vue/apps.js" %}"></script>
+
    <script src="{% static "deps/js/jquery-ajax.js" %}"></script>
-   <script src="{% static "deps/js/jquery-events.js" %}"></script>
+
    <script src="{% static "deps/js/bootstrap/bootstrap.bundle.min.js" %}"></script>
 </body>
 
