@@ -10,20 +10,26 @@
          <li class="list-group-item">
                <div class="row text-center">
                   <div class="col p-0">
-                     <div class="input-group d-flex">
+                     <div class="input-group">
                            <span class="input-group-btn">
-                              <button type="button" @click="click_minus"
+                              <button type="button"
                                  class="btn btn-dark btn-sm decrement"
-                                 data-cart-id="" data-cart-change-url=""
-                                 style="margin: 0px 5px;">-</button>
+                                 data-cart-id="{{cart.id}}" 
+                                 data-cart-change-url="{% url "cart:cart_change" %}"
+                                 style="margin: 0px 5px;">
+                                 {% csrf_token %}
+                                 -</button>
                            </span>
 
                            <input type="text" v-model="count" class="form-control number" value="{{ cart.quantity }}" readonly>
                            
                            <span class="input-group-btn">
-                              <button type="button" @click="click_plus"
+                              <button type="button"
                                  class="btn btn-dark btn-sm increment"
-                                 data-cart-id="" data-cart-change-url="" style="margin: 0px 5px;">+</button>
+                                 data-cart-id="{{ cart.id  }}" 
+                                 data-cart-change-url="{% url "cart:cart_change" %}" 
+                                 style="margin: 0px 5px;">
+                                 {% csrf_token %}+</button>
                            </span>
                      </div>
                   </div>

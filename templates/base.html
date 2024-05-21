@@ -1,6 +1,5 @@
 {% load static %}
 {% load goods_tags %}
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,15 +9,15 @@
    <link href="{% static "deps/css/bootstrap5/bootstrap.min.css" %}" rel="stylesheet">
    <link href="{% static "deps/css/my-styles.css" %}" rel="stylesheet">
 
-   <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+   {% comment %} <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> {% endcomment %}
 
    <link rel="icon" type="image/png" sizes="32x32" href="{% static "deps/images/logo.png" %}"> 
    <title>{{ title }}</title>
 </head>
 
 <body>
-   <div class="wrapper" id="app">
+   <div class="wrapper">
       <header>
          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
@@ -75,7 +74,6 @@
                               {% if user.is_admin or user.is_staff %}
                                  <li><a class="dropdown-item" href="{% url "admin:index" %}">Админ панель</a></li>
                               {% endif %}
-
                               <li>
                                  <hr class="dropdown-divider">
                               </li>
@@ -84,10 +82,8 @@
                         </li>
                      {% endif %}
                   </ul>
-
-                  {% block modal_cart %} 
-                     {% include "includes/cart_button.html" %}
-                  {% endblock modal_cart %}
+                  
+                  {% block modal_cart %}{% endblock %}
 
                   <form class="d-flex" role="search" action="{% url "catalog:search" %}" method="get">
                      <input class="form-control me-2" type="search" name="q" placeholder="Поиск" aria-label="Поиск">
@@ -130,11 +126,8 @@
 
 
    <script src="{% static "deps/js/jquery/jquery-3.7.0.min.js" %}"></script>
-
-   <script src="{% static "deps/js/vue/apps.js" %}"></script>
-
    <script src="{% static "deps/js/jquery-ajax.js" %}"></script>
-
+   {% comment %} <script src="{% static "deps/js/vue/apps.js" %}"></script> {% endcomment %}
    <script src="{% static "deps/js/bootstrap/bootstrap.bundle.min.js" %}"></script>
 </body>
 

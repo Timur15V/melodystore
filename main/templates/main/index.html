@@ -3,7 +3,9 @@
 
 {% load static %}
 
-
+{% block modal_cart %}
+    {% include "includes/cart_button.html" %}
+{% endblock modal_cart %}
 {% block content %}
    <div class="card">
       <div class="card-body">

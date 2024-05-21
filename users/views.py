@@ -78,7 +78,8 @@ def profile(request):
 
 
 def users_cart(request):
-    return render(request, "users/users_cart.html")
+    context = {"title": "MelodyStore - Корзина"}
+    return render(request, "users/users_cart.html", context=context)
 
 
 @login_required
