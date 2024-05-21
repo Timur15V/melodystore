@@ -84,7 +84,7 @@ $(document).ready(function () {
                 // Через 7сек убираем сообщение
                 setTimeout(function () {
                     successMessage.fadeOut(400);
-                }, 7000);
+                }, 2000);
 
                 // Уменьшаем количество товаров в корзине (отрисовка)
                 cartCount -= data.quantity_deleted;
@@ -97,7 +97,7 @@ $(document).ready(function () {
             },
 
             error: function (data) {
-                console.log("Ошибка при добавлении товара в корзину");
+                console.log("Ошибка при удалении товара из корзины");
             },
         });
     });
