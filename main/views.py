@@ -24,3 +24,21 @@ def about(request):
     }
 
     return render(request, "main/about.html", context)
+
+
+def ship_payment(request):
+    context = {
+        "title": "MelodyStore - Доставка и оплата",
+        "content": "Доставка и оплата",
+    }
+
+    return render(request, "main/ship_payment.html", context)
+
+
+def contact_info(request):
+    context = {
+        "title": "MelodyStore - Контактная информация",
+        "content": "Контактная информация",
+    }
+
+    return render(request, "main/contact_info.html", context)
