@@ -32,4 +32,6 @@ class ProductsAdmin(admin.ModelAdmin):
         "image",
         ("price", "discount"),
         "quantity",
+        "vendorCode",
+        "guarantee",
     ]
