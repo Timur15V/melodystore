@@ -109,6 +109,6 @@ def product(request, category_slug, subcategory_slug, product_slug):
 
     product = get_object_or_404(Products, slug=product_slug)
 
-    context = {"product": product}
+    context = {"title": f"MelodyStore - {product.name}", "product": product}
 
     return render(request, "goods/product.html", context=context)
