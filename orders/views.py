@@ -42,6 +42,7 @@ def create_order(request):
                                     f"Недостаточное количество товара {name} на складе\
                                     В наличии - {product.quantity}"
                                 )
+                                return redirect("order:create_order")
 
                             OrderItem.objects.create(
                                 order=order,
@@ -62,7 +63,7 @@ def create_order(request):
 
             except ValidationError as e:
                 messages.success(request, str(e))
-                return redirect("carts:order")
+
     else:
         initial = {
             "first_name": request.user.first_name,
