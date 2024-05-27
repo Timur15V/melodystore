@@ -8,6 +8,14 @@ html {
    min-height: calc(100vh - 200px);
 }
 
+.main-index {
+   font-size: 18px;
+}
+
+.main-index h6 {
+   font-size: 20px;
+}
+
 body {
    background-color: rgba(255, 255, 255, 0.55);
    height: 200px;
@@ -49,6 +57,19 @@ footer {
    height: 420px;
    object-fit: cover;
    object-position: top;
+}
+
+
+.container-slide {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   color: black;
+}
+
+.inner-slide {
+   width: 500px;
+   height: 500px;
 }
 
 /* footer {
